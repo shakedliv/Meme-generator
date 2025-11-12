@@ -37,6 +37,7 @@ function onSetLineTxt(text) {
     renderMeme()
 }
 
+
 function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
