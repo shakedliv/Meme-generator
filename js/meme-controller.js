@@ -6,8 +6,8 @@ renderMeme()
 function renderMeme() {
    gLineCounter = 0
     //  if (gCtx) onClearCanvas()
-    const gMeme = getMeme()
-    const memeImg = findImg(gMeme.selectedImgId)
+    const meme = getMeme()
+    const memeImg = findImg(meme.selectedImgId)
     const elImg = new Image()
     elImg.src = memeImg.url
 
@@ -16,11 +16,12 @@ function renderMeme() {
 
     elImg.onload = () => {
        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-       gMeme.lines.forEach(line => { 
+       meme.lines.forEach(line => { 
           drawText(line)
          })
          
-      }
+   }
+   renderFrame()
 }
 function drawText(line) {
     const text = line.txt
@@ -34,7 +35,6 @@ function drawText(line) {
     setLineInPlace(text, line)
 }
 function setLineInPlace(text, line) {
-   gMeme = getMeme()
     switch (gLineCounter) {
         case 0:
             gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 6)
@@ -92,4 +92,15 @@ function onAddLine() {
    addLine()
    console.log('here')
     renderMeme()
+}
+
+function onSwitchLine() {
+   const meme = getMeme()
+   switchLine()
+   const elTextInput = document.querySelector('#text-input')
+   elTextInput.value = meme.lines[meme.selectedLineIdx].txt
+}
+
+function renderFrame() {
+   
 }

@@ -43,7 +43,6 @@ function setImg(imgId) {
 }
 
 function setLineTxt(text) {
-   console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
     gMeme.lines[gMeme.selectedLineIdx].txt = text
 }
 
@@ -58,7 +57,18 @@ function increaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size++
 }
 function addLine() {
-   gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
-   console.log('hi')
-   gMeme.selectedLineIdx++
+    gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
+    console.log('hi')
+    gMeme.selectedLineIdx++
+}
+
+function switchLine() {
+    console.log('gMeme.lines.length:', gMeme.lines.length)
+    console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
+    if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
+        gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+
+    // gMeme.lines.length > gMeme.selectedLineIdx ? gMeme.selectedLineIdx++ : gMeme.selectedLineIdx = 0
+    console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
 }
