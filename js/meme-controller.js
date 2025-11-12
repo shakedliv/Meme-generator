@@ -4,7 +4,7 @@ let gCtx
 let gLineCounter
 renderMeme()
 function renderMeme() {
-   gLineCounter = 0
+    gLineCounter = 0
     //  if (gCtx) onClearCanvas()
     const meme = getMeme()
     const memeImg = findImg(meme.selectedImgId)
@@ -15,13 +15,12 @@ function renderMeme() {
     gCtx = gElCanvas.getContext('2d')
 
     elImg.onload = () => {
-       gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-       meme.lines.forEach(line => { 
-          drawText(line)
-         })
-         
-   }
-   renderFrame()
+        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+        meme.lines.forEach((line) => {
+            drawText(line)
+        })
+    }
+    renderFrame(meme)
 }
 function drawText(line) {
     const text = line.txt
@@ -38,8 +37,8 @@ function setLineInPlace(text, line) {
     switch (gLineCounter) {
         case 0:
             gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 6)
-          gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 6)
-          gLineCounter++
+            gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 6)
+            gLineCounter++
             break
         case 1:
             gCtx.fillText(
@@ -51,12 +50,12 @@ function setLineInPlace(text, line) {
                 text,
                 gElCanvas.width / 2,
                 gElCanvas.height - gElCanvas.height / 6
-          )
-          gLineCounter++
+            )
+            gLineCounter++
             break
-       default:
-           gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 2)
-           gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 2)
+        default:
+            gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 2)
+            gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 2)
     }
 }
 
@@ -87,20 +86,41 @@ function onDecrease() {
     renderMeme()
 }
 function onAddLine() {
-   const elTextInput = document.querySelector('#text-input')
-   elTextInput.value = ''
-   addLine()
-   console.log('here')
+    const elTextInput = document.querySelector('#text-input')
+    elTextInput.value = ''
+    addLine()
+    console.log('here')
     renderMeme()
 }
 
 function onSwitchLine() {
-   const meme = getMeme()
-   switchLine()
-   const elTextInput = document.querySelector('#text-input')
-   elTextInput.value = meme.lines[meme.selectedLineIdx].txt
+    const meme = getMeme()
+    switchLine()
+    const elTextInput = document.querySelector('#text-input')
+    elTextInput.value = meme.lines[meme.selectedLineIdx].txt
 }
 
-function renderFrame() {
-   
+function renderFrame(meme) {
+    gCtx.beginPath()
+    gCtx.strokeStyle = 'yellow'
+    switch (meme.selectedLineIdx) {
+        case 0:
+            gCtx.strokeRect(
+                gElCanvas.width / 2 - 20,
+                gElCanvas.height / 6 + 20,
+                120,
+                meme.lines[meme.selectedLineIdx].size + 10
+            )
+            break
+
+        default:
+            gCtx.strokeRect(
+                gElCanvas.width / 2 - 20,
+                gElCanvas.height / 6 + 20,
+                120,
+                meme.lines[meme.selectedLineIdx].size + 10
+            )
+
+            break
+    }
 }

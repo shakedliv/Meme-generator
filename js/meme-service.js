@@ -63,12 +63,7 @@ function addLine() {
 }
 
 function switchLine() {
-    console.log('gMeme.lines.length:', gMeme.lines.length)
-    console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
     if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
         gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
-
-    // gMeme.lines.length > gMeme.selectedLineIdx ? gMeme.selectedLineIdx++ : gMeme.selectedLineIdx = 0
-    console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
 }
