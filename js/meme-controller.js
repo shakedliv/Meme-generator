@@ -3,7 +3,7 @@ let gElCanvas
 let gCtx
 renderMeme()
 function renderMeme() {
-    if (gCtx) onClearCanvas()
+   //  if (gCtx) onClearCanvas()
     const currMeme = getMeme()
     const memeImg = findImg(currMeme.selectedImgId)
     const elImg = new Image()
@@ -14,15 +14,17 @@ function renderMeme() {
 
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText(currMeme.lines[currMeme.selectedLineIdx].txt)
+        drawText(currMeme)
     }
 }
-function drawText(text) {
+function drawText(currMeme) {
+   const text = currMeme.lines[currMeme.selectedLineIdx].txt
+   const currLine = currMeme.lines[currMeme.selectedLineIdx]
     gCtx.beginPath()
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'brown'
-    gCtx.fillStyle = 'black'
-    gCtx.font = '40px Arial'
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = currLine.color 
+    gCtx.font = currLine.size +'px Arial'
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
@@ -36,6 +38,5 @@ function onSetLineTxt(text) {
 }
 
 function onClearCanvas() {
-    console.log('cleaned')
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
