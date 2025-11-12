@@ -1,11 +1,13 @@
 'use strict'
 let gElCanvas
 let gCtx
+let gLineCounter
 renderMeme()
 function renderMeme() {
-   //  if (gCtx) onClearCanvas()
-    const currMeme = getMeme()
-    const memeImg = findImg(currMeme.selectedImgId)
+   gLineCounter = 0
+    //  if (gCtx) onClearCanvas()
+    const gMeme = getMeme()
+    const memeImg = findImg(gMeme.selectedImgId)
     const elImg = new Image()
     elImg.src = memeImg.url
 
@@ -13,23 +15,49 @@ function renderMeme() {
     gCtx = gElCanvas.getContext('2d')
 
     elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText(currMeme)
-    }
+       gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+       gMeme.lines.forEach(line => { 
+          drawText(line)
+         })
+         
+      }
 }
-function drawText(currMeme) {
-   const text = currMeme.lines[currMeme.selectedLineIdx].txt
-   const currLine = currMeme.lines[currMeme.selectedLineIdx]
+function drawText(line) {
+    const text = line.txt
     gCtx.beginPath()
     gCtx.lineWidth = 0.5
     gCtx.strokeStyle = 'white'
-    gCtx.fillStyle = currLine.color 
-    gCtx.font = currLine.size +'px Arial'
+    gCtx.fillStyle = line.color
+    gCtx.font = line.size + 'px Arial'
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
-
-    gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 6)
-    gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 6)
+    setLineInPlace(text, line)
+}
+function setLineInPlace(text, line) {
+   gMeme = getMeme()
+    switch (gLineCounter) {
+        case 0:
+            gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 6)
+          gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 6)
+          gLineCounter++
+            break
+        case 1:
+            gCtx.fillText(
+                text,
+                gElCanvas.width / 2,
+                gElCanvas.height - gElCanvas.height / 6
+            )
+            gCtx.strokeText(
+                text,
+                gElCanvas.width / 2,
+                gElCanvas.height - gElCanvas.height / 6
+          )
+          gLineCounter++
+            break
+       default:
+           gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 2)
+           gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 2)
+    }
 }
 
 function onSetLineTxt(text) {
@@ -37,11 +65,9 @@ function onSetLineTxt(text) {
     renderMeme()
 }
 
-
 function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
-
 
 function onDownloadCanvas(elLink) {
     const elCanvas = gElCanvas.toDataURL('image/jpeg')
@@ -49,14 +75,21 @@ function onDownloadCanvas(elLink) {
 }
 
 function onSetColor(color) {
-   setColor(color)
-   renderMeme()
+    setColor(color)
+    renderMeme()
 }
 function onIncrease() {
-   increaseFontSize()
-   renderMeme()
+    increaseFontSize()
+    renderMeme()
 }
 function onDecrease() {
-   decreaseFontSize()
-   renderMeme()
+    decreaseFontSize()
+    renderMeme()
+}
+function onAddLine() {
+   const elTextInput = document.querySelector('#text-input')
+   elTextInput.value = ''
+   addLine()
+   console.log('here')
+    renderMeme()
 }

@@ -39,20 +39,26 @@ function findImg(imgId) {
 }
 
 function setImg(imgId) {
-   gMeme.selectedImgId = imgId
+    gMeme.selectedImgId = imgId
 }
 
 function setLineTxt(text) {
+   console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
     gMeme.lines[gMeme.selectedLineIdx].txt = text
 }
 
 function setColor(color) {
-   gMeme.lines[gMeme.selectedLineIdx].color = color
+    gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 function decreaseFontSize() {
-   gMeme.lines[gMeme.selectedLineIdx].size--
+    gMeme.lines[gMeme.selectedLineIdx].size--
 }
 function increaseFontSize() {
-   gMeme.lines[gMeme.selectedLineIdx].size++
+    gMeme.lines[gMeme.selectedLineIdx].size++
+}
+function addLine() {
+   gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
+   console.log('hi')
+   gMeme.selectedLineIdx++
 }
