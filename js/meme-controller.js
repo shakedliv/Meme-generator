@@ -21,8 +21,8 @@ function drawText(currMeme) {
    const text = currMeme.lines[currMeme.selectedLineIdx].txt
    const currLine = currMeme.lines[currMeme.selectedLineIdx]
     gCtx.beginPath()
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
+    gCtx.lineWidth = 0.5
+    gCtx.strokeStyle = 'white'
     gCtx.fillStyle = currLine.color 
     gCtx.font = currLine.size +'px Arial'
     gCtx.textAlign = 'center'
@@ -40,4 +40,23 @@ function onSetLineTxt(text) {
 
 function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+
+function onDownloadCanvas(elLink) {
+    const elCanvas = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = elCanvas
+}
+
+function onSetColor(color) {
+   setColor(color)
+   renderMeme()
+}
+function onIncrease() {
+   increaseFontSize()
+   renderMeme()
+}
+function onDecrease() {
+   decreaseFontSize()
+   renderMeme()
 }

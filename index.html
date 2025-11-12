@@ -9,7 +9,7 @@
     <body>
         <header>Meme Generator</header>
 
-        <section class="gallery">
+        <main class="gallery">
             <!-- <img
                 class="meme-img"
                 src="/meme-imgs/meme-imgs(square)/1.jpg"
@@ -134,14 +134,37 @@
                 onclick="renderMeme(this)"
 
             /> -->
-        </section>
-        <section class="editor hidden">
-         <input type="text" id="text-input" oninput="onSetLineTxt(this.value)">
-            <div class="canvas-container">
-                <canvas width="500" height="500" class="meme-canvas">
-                </canvas>
-            </div>
-        </section>
+        </main>
+
+        <main class="editor hidden">
+            <section class="canvas-container">
+                <canvas width="500" height="500" class="meme-canvas"> </canvas>
+            </section>
+
+            <section class="operations">
+                <input
+                    type="text"
+                    id="text-input"
+                    oninput="onSetLineTxt(this.value)"
+                    placeholder="enter text here"
+                />
+                <a
+                    href="#"
+                    class="btn"
+                    onclick="onDownloadCanvas(this)"
+                    download="my-img.jpg"
+                    >Download</a
+                >
+                <input
+                    type="color"
+                    id="color-input"
+                    oninput="onSetColor(this.value)"
+                    class="color"
+                />
+                <button class="incress" onclick="onIncrease()">⬆️</button>
+                <button class="decrease" onclick="onDecrease()">⬇️</button>
+            </section>
+        </main>
 
         <script src="js/meme-service.js"></script>
         <script src="js/meme-controller.js"></script>

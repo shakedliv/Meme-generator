@@ -18,9 +18,9 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'enter text here',
+            txt: '',
             size: 30,
-            color: 'red',
+            color: 'black',
         },
     ],
 }
@@ -44,4 +44,15 @@ function setImg(imgId) {
 
 function setLineTxt(text) {
     gMeme.lines[gMeme.selectedLineIdx].txt = text
+}
+
+function setColor(color) {
+   gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function decreaseFontSize() {
+   gMeme.lines[gMeme.selectedLineIdx].size--
+}
+function increaseFontSize() {
+   gMeme.lines[gMeme.selectedLineIdx].size++
 }
