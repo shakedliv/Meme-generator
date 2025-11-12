@@ -9,7 +9,7 @@
     <body>
         <header>Meme Generator</header>
 
-        <section class="gallery">
+        <section class="gallery hidden">
             <img
                 class="meme-img"
                 src="/meme-imgs/meme-imgs(square)/1.jpg"
@@ -136,9 +136,9 @@
             /> -->
         </section>
         <section class="editor">
+         <input type="text" oninput="onSetLineTxt(this.value)">
             <div class="canvas-container">
-                <canvas width="400" height="400" class="meme-canvas">
-                    <h1>aaa</h1>
+                <canvas width="500" height="500" class="meme-canvas">
                 </canvas>
             </div>
         </section>
