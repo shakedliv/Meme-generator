@@ -9,13 +9,13 @@
     <body>
         <header>Meme Generator</header>
 
-        <section class="gallery hidden">
-            <img
+        <section class="gallery">
+            <!-- <img
                 class="meme-img"
                 src="/meme-imgs/meme-imgs(square)/1.jpg"
                 alt=""
                 onclick="renderMeme()"
-            />
+            /> -->
             <!-- <img
                 class="meme-img"
                 src="/meme-imgs/meme-imgs(square)/2.jpg"
@@ -136,7 +136,7 @@
             /> -->
         </section>
         <section class="editor">
-         <input type="text" oninput="onSetLineTxt(this.value)">
+         <input type="text" id="text-input" oninput="onSetLineTxt(this.value)">
             <div class="canvas-container">
                 <canvas width="500" height="500" class="meme-canvas">
                 </canvas>
@@ -145,5 +145,6 @@
 
         <script src="js/meme-service.js"></script>
         <script src="js/meme-controller.js"></script>
+        <script src="js/gallery-controller.js"></script>
     </body>
 </html>
