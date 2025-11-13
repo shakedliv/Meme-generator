@@ -116,11 +116,9 @@ function setColor(color) {
 
 function decreaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size--
-    renderMeme()
 }
 function increaseFontSize() {
    gMeme.lines[gMeme.selectedLineIdx].size++
-   renderMeme()
 }
 function addLine() {
     gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
@@ -130,7 +128,7 @@ function addLine() {
 function switchLine() {
     if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
         gMeme.selectedLineIdx = 0
-    else gMeme.selectedLineIdx++
+   else gMeme.selectedLineIdx++
 }
 
 function setTxtSize() {

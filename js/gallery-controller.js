@@ -26,3 +26,7 @@ function onImgSelect(imgId) {
    renderMeme()
 
 }
+
+function toggleMenu() {
+      document.body.classList.toggle('menu-open')
+    }
