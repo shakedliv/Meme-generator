@@ -4,6 +4,7 @@
    justify-content: center;
    grid-template-columns:1fr 1fr;
    gap: 2em;
+   padding-inline: 20px;
 }
 
 .editor{
@@ -43,6 +44,7 @@ grid-row: 1;
 border-radius: 1em;
 width: 25vw;
 height: 6vh;
+padding-inline:1em;
 
 }
 .color-btn{
