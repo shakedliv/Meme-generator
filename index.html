@@ -6,134 +6,14 @@
         <title>Meme Generator</title>
         <link rel="stylesheet" href="/styles/styles.css" />
     </head>
-    <body>
-        <header>Meme Generator</header>
+    <body onload="onInit()">
+        <header class="header flex">
+         <h2 class="logo">Memegen</h2>
+<button class="btn-toggle-menu btn" onclick="toggleMenu()">☰</button>
+      </header>
 
-        <main class="gallery">
-            <!-- <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/1.jpg"
-                alt=""
-                onclick="renderMeme()"
-            /> -->
-            <!-- <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/2.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/3.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/4.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/5.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/6.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/7.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/8.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/9.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/10.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/11.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/12.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/13.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/14.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/15.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/16.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/17.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            />
-            <img
-                class="meme-img"
-                src="/meme-imgs/meme-imgs(square)/18.jpg"
-                alt=""
-                onclick="renderMeme(this)"
-
-            /> -->
+        <main class="gallery grid">
+           
         </main>
 
         <main class="editor hidden">
@@ -150,21 +30,22 @@
                 />
                 <a
                     href="#"
-                    class="btn"
+                    class="btn download"
                     onclick="onDownloadCanvas(this)"
                     download="my-img.jpg"
                     >Download</a
                 >
+                <label class="color-btn btn">
                 <input
                     type="color"
                     id="color-input"
                     oninput="onSetColor(this.value)"
                     class="color"
-                />
-                <button class="incress" onclick="onIncrease()">⬆️</button>
-                <button class="decrease" onclick="onDecrease()">⬇️</button>
-                <button class="add-line" onclick="onAddLine()">➕</button>
-                <button class="switch-line" onclick="onSwitchLine()">🔃</button>
+                />🎨</label>
+                <button class="incress btn" onclick="onIncrease()">⬆️</button>
+                <button class="decrease btn" onclick="onDecrease()">⬇️</button>
+                <button class="add-line btn" onclick="onAddLine()">➕</button>
+                <button class="switch-line btn" onclick="onSwitchLine()">🔃</button>
             </section>
         </main>
 

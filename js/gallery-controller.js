@@ -1,5 +1,8 @@
 'use strict'
-renderGallery()
+function onInit() {
+   renderGallery()
+   
+}
 function renderGallery() {
    const elGallery = document.querySelector('.gallery')
    const imagesArray = getImages() // [{},{}]

@@ -4,12 +4,76 @@ var gImgs = [
     {
         id: 1,
         url: 'meme-imgs/meme-imgs(square)/1.jpg',
-        keywords: ['funny', 'politics'],
+        keywords: ['Funny', 'politics'],
     },
     {
         id: 2,
         url: 'meme-imgs/meme-imgs(square)/2.jpg',
         keywords: ['dogs', 'cute'],
+    },{
+        id: 3,
+        url: 'meme-imgs/meme-imgs(square)/3.jpg',
+        keywords: ['dogs', 'cute', 'Babies'],
+    },{
+        id: 4,
+        url: 'meme-imgs/meme-imgs(square)/4.jpg',
+        keywords: ['Cats', 'cute'],
+    },{
+        id: 5,
+        url: 'meme-imgs/meme-imgs(square)/5.jpg',
+        keywords: ['Babies', 'Funny'],
+    },{
+        id: 6,
+        url: 'meme-imgs/meme-imgs(square)/6.jpg',
+        keywords: ['Funny', 'TV'],
+    },{
+        id: 7,
+        url: 'meme-imgs/meme-imgs(square)/7.jpg',
+        keywords: ['Babies', 'cute', 'Funny'],
+    },{
+        id: 8,
+        url: 'meme-imgs/meme-imgs(square)/8.jpg',
+        keywords: ['mysterious','Happy'],
+    },{
+        id: 9,
+        url: 'meme-imgs/meme-imgs(square)/9.jpg',
+        keywords: ['Babies', 'cute', 'Funny','Happy'],
+    },{
+        id: 10,
+        url: 'meme-imgs/meme-imgs(square)/10.jpg',
+        keywords: ['Funny', 'politics' , 'Happy'],
+    },{
+        id: 11,
+        url: 'meme-imgs/meme-imgs(square)/11.jpg',
+        keywords: ['Funny', 'outrages'],
+    },{
+        id: 12,
+        url: 'meme-imgs/meme-imgs(square)/12.jpg',
+        keywords: ['TV'],
+    },{
+        id: 13,
+        url: 'meme-imgs/meme-imgs(square)/13.jpg',
+        keywords: ['Movie'],
+    },{
+        id: 14,
+        url: 'meme-imgs/meme-imgs(square)/14.jpg',
+        keywords: ['Movie', 'Serious'],
+    },{
+        id: 15,
+        url: 'meme-imgs/meme-imgs(square)/15.jpg',
+        keywords: ['Serious', 'TV'],
+    },{
+        id: 16,
+        url: 'meme-imgs/meme-imgs(square)/16.jpg',
+        keywords: ['Funny', 'awkward', 'TV'],
+    },{
+        id: 17,
+        url: 'meme-imgs/meme-imgs(square)/17.jpg',
+        keywords: ['politics', 'Serious'],
+    },{
+        id: 18,
+        url: 'meme-imgs/meme-imgs(square)/18.jpg',
+        keywords: ['Funny', 'outrages'],
     },
 ]
 
@@ -25,7 +89,7 @@ var gMeme = {
     ],
 }
 
-var gKeywordSearchCountMap = { funny: 12, cat: 6, baby: 2 }
+var gKeywordSearchCountMap = { Funny: 12, cat: 6, Babies: 4 }
 
 function getMeme() {
     return gMeme
@@ -52,13 +116,14 @@ function setColor(color) {
 
 function decreaseFontSize() {
     gMeme.lines[gMeme.selectedLineIdx].size--
+    renderMeme()
 }
 function increaseFontSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size++
+   gMeme.lines[gMeme.selectedLineIdx].size++
+   renderMeme()
 }
 function addLine() {
     gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
-    console.log('hi')
     gMeme.selectedLineIdx++
 }
 
@@ -66,4 +131,14 @@ function switchLine() {
     if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
         gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
+}
+
+function setTxtSize() {
+    gMeme.lines[gMeme.selectedLineIdx].txtSize =
+        gMeme.lines[gMeme.selectedLineIdx].txt.length *
+        gMeme.lines[gMeme.selectedLineIdx].size // calc the txt size
+}
+
+function setLocation(lineLocation) {
+    gMeme.lines[gMeme.selectedLineIdx].txtLocation = lineLocation
 }

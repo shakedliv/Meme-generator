@@ -8,6 +8,8 @@
 @import url('/styles/basics/helpers.css');
 
 /* COMPONENTS */
+@import url('/styles/components/btn.css');
+@import url('/styles/components/gallery-img.css');
 
 
 /* MQ */

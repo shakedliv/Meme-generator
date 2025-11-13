@@ -1,0 +1,9 @@
+
+
+.gallery img{
+   width: 100%;
+   height: auto;
+   object-fit: cover;
+   margin-bottom: 1em;
+   border-radius: 20px;
+}
