@@ -49,7 +49,7 @@ padding-inline:1em;
 }
 .color-btn{
    grid-column: 1;
-   grid-row: 2;
+   grid-row: 3;
 }
 
 .incress{
@@ -63,16 +63,16 @@ padding-inline:1em;
 }
 
 .add-line{
-   grid-column: 1;
+   grid-column: 3;
    grid-row: 3;
 }
 
 .switch-line{
-   grid-column: 2;
-   grid-row: 3;
+   grid-column: 1;
+   grid-row: 2;
 }
 
 .download{
-   grid-column: 3;
+   grid-column: 2;
    grid-row: 3;
 }

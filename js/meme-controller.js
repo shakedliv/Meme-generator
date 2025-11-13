@@ -1,9 +1,10 @@
 'use strict'
 let gElCanvas
 let gCtx
+let gIsLeft = false
+let gIsRight = false
 renderMeme()
 function renderMeme() {
-    //  if (gCtx) onClearCanvas()
     const meme = getMeme()
     const memeImg = findImg(meme.selectedImgId)
     const elImg = new Image()
@@ -32,28 +33,40 @@ function drawText(line, idx) {
     setLineInPlace(text, idx, line)
 }
 function setLineInPlace(text, idx, line) {
-    let lineLocation = {}
-    lineLocation.x = gElCanvas.width / 2
+   line.txtLocation = {}
+   if (gIsLeft) {
+      line.txtLocation.x = gElCanvas.width / 6 
+      console.log('left :', gElCanvas.width / 6 )
+   }
+   else if (gIsRight) {
+      line.txtLocation.x = gElCanvas.width - gElCanvas.width / 6 
+      console.log('right :', gElCanvas.width - gElCanvas.width / 6  )
+      
+   }
+   else {
+      line.txtLocation.x = gElCanvas.width / 2 
+      console.log('center :', gElCanvas.width / 2 )
+      
+   }
     switch (idx) {
         case 0:
-            lineLocation.y = gElCanvas.height / 6
-            line.txtLocation = lineLocation
-            gCtx.fillText(text, lineLocation.x, lineLocation.y)
-            gCtx.strokeText(text, lineLocation.x, lineLocation.y)
+            line.txtLocation.y = gElCanvas.height / 6
+          gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
+            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
             break
         case 1:
-            lineLocation.y = gElCanvas.height - gElCanvas.height / 6
-            line.txtLocation = lineLocation
+            line.txtLocation.y = gElCanvas.height - gElCanvas.height / 6
+            line.txtLocation = line.txtLocation
 
-            gCtx.fillText(text, lineLocation.x, lineLocation.y)
-            gCtx.strokeText(text, lineLocation.x, lineLocation.y)
+            gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
+            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
             break
         default:
-            lineLocation.y = gElCanvas.height / 2
-            line.txtLocation = lineLocation
+            line.txtLocation.y = gElCanvas.height / 2
+            line.txtLocation = line.txtLocation
 
-            gCtx.fillText(text, lineLocation.x, lineLocation.y)
-            gCtx.strokeText(text, lineLocation.x, lineLocation.y)
+            gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
+            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
     }
    setTxtSize()
 }
@@ -62,9 +75,7 @@ function onSetLineTxt(text) {
     renderMeme()
 }
 
-function onClearCanvas() {
-    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
-}
+
 
 function onDownloadCanvas(elLink) {
     const elCanvas = gElCanvas.toDataURL('image/jpeg')
@@ -87,7 +98,6 @@ function onAddLine() {
     const elTextInput = document.querySelector('#text-input')
     elTextInput.value = ''
     addLine()
-    console.log('here')
     renderMeme()
 }
 
@@ -107,7 +117,6 @@ function renderFrame() {
    gCtx.strokeStyle = 'yellow'
    const width = gCtx.measureText(currLine.txt).width 
    const hight = currLine.size * 2
-   console.log('width: :', width )
     
             gCtx.strokeRect(
                 currLine.txtLocation.x - (width / 2) - 10,
@@ -117,47 +126,119 @@ function renderFrame() {
             )
  
 }
-function onDragLine(ev){
 
+
+
+
+
+
+
+function onLeftAlignment() {
+   gIsRight = false
+   gIsLeft = true
+   renderMeme()
+}
+function onCenterAlignment() {
+   gIsRight = false
+   gIsLeft = false
+   renderMeme()
+}
+function onRightAlignment() {
+   gIsRight = true
+   gIsLeft = false
+   renderMeme()
+}
+function changeFont(font) {
+   console.log('font:', font)
+   const elCanvas = document.querySelector('.canvas-container')
+   elCanvas.style.fontFamily = font
 }
 
 
-function getEvPos(ev) {
-  const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+// not working
+function onPressLine(ev){
+   const hit = isInLine(ev)
+   console.log('isInLine:', hit)
+   return hit
+}
+
+// not working
+function isInLine(ev) {
+   const meme = getMeme()
+   const pos = getEvPos(ev) // {x:, y:}
+   
+   for (let i = 0; i < meme.lines.length; i++) {
+      const currLine = meme.lines[i]
+        if (!currLine.txt || !currLine.txtLocation) continue
+
+        
+        const width = gCtx.measureText(currLine.txt).width
+        const height = currLine.size * 2
+
+        const startX = currLine.txtLocation.x - width / 2 - 10
+        const startY = currLine.txtLocation.y - currLine.size
+        const endX = startX + width + 20 // include padding used when drawing the frame
+        const endY = startY + height
+
+        if (pos.x >= startX && pos.x <= endX && pos.y >= startY && pos.y <= endY) {
+            // return the hit line and its index for further handling (dragging)
+            console.log('{ line: currLine, idx: i }:', { line: currLine, idx: i }) 
+        }
+    }
+
+    return null
+   }
+   // not working
+   
+   function getEvPos(ev) {
+      const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
   let pos = {
-    x: ev.offsetX,
+     x: ev.offsetX,
     y: ev.offsetY,
   }
-
+  
   if (TOUCH_EVS.includes(ev.type)) {
-    // Prevent triggering the mouse ev
-    ev.preventDefault()
-    // Gets the first touch point
-    ev = ev.changedTouches[0]
-    // Calc the right pos according to the touch screen
-    pos = {
-      x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+     // Prevent triggering the mouse ev
+     ev.preventDefault()
+     // Gets the first touch point
+     ev = ev.changedTouches[0]
+     // Calc the right pos according to the touch screen
+     pos = {
+        x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+        y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
     }
    }
    console.log('pos:',pos )
-  return pos
+   return pos
 }
 
+// function saveMeme() {
+//    const canvasData = gElCanvas.toDataURL('image/jpeg')
+//    saveToStorage('images',canvasData)
+// }
+
+// function showSavedMemes() {
+//    console.log(':', loadFromStorage('images'))
+   
+// }
 
 
 
-
+// not using
 
 function onResize() {
    resizeCanvas()
    renderMeme()
 }
 
-
 function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.offsetWidth
   gElCanvas.height = elContainer.offsetHeight
+}
+
+function onClearCanvas() {
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }

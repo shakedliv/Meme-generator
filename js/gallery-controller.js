@@ -38,3 +38,13 @@ function openGallery() {
    elEditor.classList.add('hidden')
    renderMeme()
 }
+
+function showAbout() {
+   const elGallery = document.querySelector('.gallery')
+   elGallery.classList.add('hidden')
+   const elEditor = document.querySelector('.editor')
+   elEditor.classList.add('hidden')
+   const elAbout = document.querySelector('.about')
+   elAbout.classList.remove('hidden')
+   renderMeme()
+}

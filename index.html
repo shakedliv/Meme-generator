@@ -5,14 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Meme Generator</title>
         <link rel="stylesheet" href="/styles/styles.css" />
+        <script
+            src="https://kit.fontawesome.com/4597a722f2.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body onload="onInit()" class="main-layout">
         <header class="header flex">
          <h2 class="logo">MemeGenerator</h2>
          <nav>
          <button onclick="openGallery()">Gallery</button>
-         <button onclick="">Saved</button>
-         <button onclick="">About</button>
+         <!-- <button onclick="showSavedMemes()">Saved</button> -->
+         <button onclick="showAbout()">About</button>
          </nav>
      <!-- <button class="btn-toggle-menu btn" onclick="toggleMenu()">☰</button> -->
       </header>
@@ -28,38 +32,60 @@
 
             <section class="operations">
                 <input
+                  title="Enter text"
                     type="text"
                     id="text-input"
                     oninput="onSetLineTxt(this.value)"
                     placeholder="enter text here"
                 />
-                <label class="color-btn btn">
-                   <input
-                   type="color"
-                   id="color-input"
-                   oninput="onSetColor(this.value)"
-                   class="color"
-                   />🎨</label>
-                   <button class="incress btn" onclick="onIncrease()">⬆️</button>
-                   <button class="decrease btn" onclick="onDecrease()">⬇️</button>
-                   <button class="add-line btn" onclick="onAddLine()">➕</button>
-                   <button class="switch-line btn" onclick="onSwitchLine()">🔃</button>
+                <!-- <select id="fontSelect" onchange="changeFont(this.value)">
+                   <option value="Arial" style="font-family: Arial;">Arial</option>
+                   <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
+                   <option value="Courier New" style="font-family: 'Courier New';">Courier New</option>
+                   <option value="Georgia" style="font-family: Georgia;">Georgia</option>
+                   <option value="Verdana" style="font-family: Verdana;">Verdana</option>
+                  </select> -->
+                  <button class="switch-line btn" onclick="onSwitchLine()" title="Switch line">🔃</button>
+                  <button class="increase btn" onclick="onIncrease()" title="Increase font size">⬆️</button>
+                  <button class="decrease btn" onclick="onDecrease()" title="Decrease font size">⬇️</button>
+                  <label class="color-btn btn" title="Choose font color">
+                     <input
+                     
+                     type="color"
+                     id="color-input"
+                     oninput="onSetColor(this.value)"
+                     class="color"
+                     />🎨</label>
+                   <button title="Add Line" class="add-line btn" onclick="onAddLine()">➕</button>
+                   <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
+                   <button title="Align left" class="font-asm btn fa-solid fa-align-left" onclick="onLeftAlignment()"></button>
+                   <button title="Align center" class="font-asm btn fa-solid fa-align-center" onclick="onCenterAlignment()"></button>
+                   <button title="Align right" class="font-asm btn fa-solid fa-align-right" onclick="onRightAlignment()"></button>
+
+
+                   
                    <a
+                      title="Download"
                        href="#"
-                       class="btn download"
+                       class="btn download btn fa-solid fa-cloud-arrow-up"
                        onclick="onDownloadCanvas(this)"
                        download="my-img.jpg"
-                       >Download</a
+                       ></a
                    >
             </section>
         </main>
         <main class="about hidden">
-           <h1>All right reserved to Shaked livyani</h1>
-      <p>This project was created as a part of coding academy course
-
+           <h1>Meme Generator</h1>
+           <p class="about-txt">
+      This project was created by Shaked Livyani as a part of coding academy course. <br>
+      in this application you can create your own Meme! <br>
+       this project uses Canvas, a new property of HTML 
       </p>
+      <img src="meme-imgs/Shaked.jpg" alt="" class="shaked">
+      <p class="about-txt">All rights reserved</p>
    </main>
    <footer class="footer">Made by Shaked Livyani</footer>
+        <script src="js/storage.service.js"></script>
         <script src="js/meme-service.js"></script>
         <script src="js/meme-controller.js"></script>
         <script src="js/gallery-controller.js"></script>

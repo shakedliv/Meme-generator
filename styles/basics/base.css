@@ -55,3 +55,18 @@ left:0;
 .download{
    display: inline-block;
 }
+
+h1{
+   text-align: center;
+}
+.about-txt{
+   text-align: center;
+   font-size: large;
+   line-height: 2;
+}
+.shaked{
+   width: 40vw;
+   height: auto;
+   display: block;
+   margin: auto;
+}
