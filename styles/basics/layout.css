@@ -37,6 +37,8 @@
    grid-template-columns: 1fr 1fr 1fr;
    grid-template-rows: 1fr 1fr 1fr;
 place-items: center;
+background: linear-gradient(0.5turn, #4182c4, #232142);
+padding: 3em 1em;
 }
 #text-input{
 grid-column: 1 / 4;

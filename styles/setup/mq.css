@@ -5,7 +5,7 @@
 
 @media (min-width: 860px) {
    .gallery {
-        grid-template-columns:  1fr 1fr 1fr
+        grid-template-columns:  1fr 1fr 1fr 1fr
    }
    .editor{
       flex-direction: row;
@@ -16,7 +16,7 @@
 
 @media (min-width: 1080px) {
     .gallery {
-        grid-template-columns: 1fr 1fr 1fr 1fr
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr
                 
     }
 }
