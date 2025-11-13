@@ -1,17 +1,31 @@
 body{
    background-color: rgb(59, 55, 55);
+   margin: 0;
+padding: 0;
 }
+.footer{
+text-align: center; 
+   background-color: rgb(133, 121, 121);
+   color: rgb(196, 184, 184);
+padding: 12px;
+position: fixed;
+bottom:0;
+right: 0;
+left:0;
+}
+
 
 .header{
    display: flex;
+   align-items: center;
+   justify-content: space-between;
+
    background-color: rgb(133, 121, 121);
    color: rgb(196, 184, 184);
-   border-radius: 20px;
-   justify-content: space-between;
-   display: flex;
-   align-items: center;
+
    padding: 1em 2em;
    margin-bottom: 2em;
+
    & button{
       background-color: rgb(133, 121, 121);
       padding: 1em;
