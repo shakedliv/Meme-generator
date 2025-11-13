@@ -1,0 +1,22 @@
+@media (max-width: 640px) {
+}
+
+/* Small BP */
+
+@media (min-width: 860px) {
+   .gallery {
+        grid-template-columns:  1fr 1fr 1fr
+   }
+   .editor{
+      flex-direction: row;
+   }
+}
+
+/* Large BP */
+
+@media (min-width: 1080px) {
+    .gallery {
+        grid-template-columns: 1fr 1fr 1fr 1fr
+                
+    }
+}

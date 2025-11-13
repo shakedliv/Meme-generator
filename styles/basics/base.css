@@ -4,10 +4,25 @@ body{
 
 .header{
    display: flex;
-   background-color: rgb(34, 30, 30);
+   background-color: rgb(133, 121, 121);
    color: rgb(196, 184, 184);
    border-radius: 20px;
    justify-content: space-between;
+   display: flex;
+   align-items: center;
+   padding: 1em 2em;
+   margin-bottom: 2em;
+   & button{
+      background-color: rgb(133, 121, 121);
+      padding: 1em;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.1em;
+   }
+   & button:hover{
+      background-color: rgb(109, 98, 98);
+      cursor: pointer;
+   }
 }
 .color-btn {
   position: relative;
@@ -17,7 +32,7 @@ body{
 }
 .color {
    
-    position: absolute;
+  position: absolute;
   inset: 0;
   opacity: 0;
   cursor: pointer;

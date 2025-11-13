@@ -29,4 +29,12 @@ function onImgSelect(imgId) {
 
 function toggleMenu() {
       document.body.classList.toggle('menu-open')
-    }
+}
+    
+function openGallery() {
+   const elGallery = document.querySelector('.gallery')
+   elGallery.classList.remove('hidden')
+   const elEditor = document.querySelector('.editor')
+   elEditor.classList.add('hidden')
+   renderMeme()
+}

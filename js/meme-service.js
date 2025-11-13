@@ -130,7 +130,6 @@ function switchLine() {
         gMeme.selectedLineIdx = 0
    else gMeme.selectedLineIdx++
 }
-
 function setTxtSize() {
     gMeme.lines[gMeme.selectedLineIdx].txtSize =
         gMeme.lines[gMeme.selectedLineIdx].txt.length *
@@ -139,4 +138,9 @@ function setTxtSize() {
 
 function setLocation(lineLocation) {
     gMeme.lines[gMeme.selectedLineIdx].txtLocation = lineLocation
+}
+
+
+function isInLine(clickedPos) {
+   
 }
