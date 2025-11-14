@@ -12,11 +12,11 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   gap: 2em;
+   gap: 1em;
 }
 
 .canvas-container{
-   width: 60vw;
+   width: 40vw;
    max-width: 600px;
    max-height: 600px;
    height: auto;
@@ -37,24 +37,48 @@
    grid-template-columns: 1fr 1fr 1fr;
    grid-template-rows: 1fr 1fr 1fr;
 place-items: center;
+place-content: center;
 background: linear-gradient(0.5turn, #4182c4, #232142);
 padding: 3em 1em;
+
+min-width: 250px;
+min-height: 200px;
+
 }
 #text-input{
-grid-column: 1 / 4;
 grid-row: 1;
 border-radius: 1em;
 width: 25vw;
-height: 6vh;
+max-width: 220px;
+height: 4vh;
 padding-inline:1em;
 
 }
+.add-line{
+   grid-column: 3;
+   grid-row: 2;
+}
+
+.switch-line{
+   grid-column: 1;
+   grid-row: 2;
+}
+.delete-line{
+
+}
+
+.font-modifier{
+   grid-column: 1 / -1;
+   grid-row: 3;
+   display: grid;
+}
+
 .color-btn{
    grid-column: 1;
    grid-row: 3;
 }
 
-.incress{
+.increase{
    grid-column: 2;
    grid-row: 2;
 }
@@ -64,17 +88,21 @@ padding-inline:1em;
    grid-row: 2;
 }
 
-.add-line{
-   grid-column: 3;
-   grid-row: 3;
-}
 
-.switch-line{
-   grid-column: 1;
-   grid-row: 2;
+
+
+
+.full-line {
+grid-column: 1 / -1;
 }
 
 .download{
    grid-column: 2;
    grid-row: 3;
+}
+
+
+
+.rights{
+   margin-bottom: 3em;
 }

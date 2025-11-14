@@ -101,6 +101,7 @@ var gMeme = {
             txt: '',
             size: 30,
             color: 'black',
+            font: 'Arial'
         },
     ],
 }
@@ -208,4 +209,30 @@ function selectLine(clickedPos) {
     return foundLine
 }
 
+function moveUp() {
+   const currLine = gMeme.lines[gMeme.selectedLineIdx]
+   if (currLine.txt = '') return
+   currLine.startY--
+   currLine.endY--
+}
+function moveDown() {
+   const currLine = gMeme.lines[gMeme.selectedLineIdx]
+   if (currLine.txt = '') return
+   currLine.startY++
+   currLine.endY++
+}
 
+
+function clearMeme() {
+   gMeme.selectedLineIdx = 0
+   gMeme.lines = [
+        {
+            txt: '',
+            size: 30,
+            color: 'black',
+            font: 'Arial'
+        },
+   ]
+   renderTxtBox()
+   renderFontFamily()
+}

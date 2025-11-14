@@ -12,80 +12,170 @@
     </head>
     <body onload="onInit()" class="main-layout">
         <header class="header flex">
-         <img class="logo" src="/meme-imgs/LOGO.png"></img>
-         <nav>
-         <button onclick="openGallery()">Gallery</button>
-         <!-- <button onclick="showSavedMemes()">Saved</button> -->
-         <button onclick="showAbout()">About</button>
-         </nav>
-     <!-- <button class="btn-toggle-menu btn" onclick="toggleMenu()">☰</button> -->
-      </header>
+            <img class="logo" src="/meme-imgs/LOGO.png" />
+            <nav>
+                <button onclick="openGallery()">Gallery</button>
+                <!-- <button onclick="showSavedMemes()">Saved</button> -->
+                <button onclick="showAbout()">About</button>
+            </nav>
+            <!-- <button class="btn-toggle-menu btn" onclick="toggleMenu()">☰</button> -->
+        </header>
 
-        <main class="gallery grid">
-           
-        </main>
+        <main class="gallery grid"></main>
 
         <main class="editor hidden">
             <section class="canvas-container">
-                <canvas width="450" height="450" class="meme-canvas" onclick="onCanvasClick(event)"> </canvas>
+                <canvas
+                    width="450"
+                    height="450"
+                    class="meme-canvas"
+                    onclick="onCanvasClick(event)"
+                >
+                </canvas>
             </section>
 
             <section class="operations">
                 <input
-                  title="Enter text"
+                    title="Enter text"
+                    class="full-line"
                     type="text"
                     id="text-input"
                     oninput="onSetLineTxt(this.value)"
                     placeholder="enter text here"
                 />
-                <!-- <select id="fontSelect" onchange="changeFont(this.value)">
-                   <option value="Arial" style="font-family: Arial;">Arial</option>
-                   <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
-                   <option value="Courier New" style="font-family: 'Courier New';">Courier New</option>
-                   <option value="Georgia" style="font-family: Georgia;">Georgia</option>
-                   <option value="Verdana" style="font-family: Verdana;">Verdana</option>
-                  </select> -->
-                  <button class="switch-line btn" onclick="onSwitchLine()" title="Switch line">🔃</button>
-                  <button class="increase btn" onclick="onIncrease()" title="Increase font size">⬆️</button>
-                  <button class="decrease btn" onclick="onDecrease()" title="Decrease font size">⬇️</button>
-                  <label class="color-btn btn" title="Choose font color">
-                     <input
-                     
-                     type="color"
-                     id="color-input"
-                     oninput="onSetColor(this.value)"
-                     class="color"
-                     />🎨</label>
-                   <button title="Add Line" class="add-line btn" onclick="onAddLine()">➕</button>
-                   <button title="Delete Line" class="delete-line btn" onclick="onDeleteLine()">🗑️</button>
-                   <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
-                   <button title="Align left" class="font-asm btn fa-solid fa-align-left" onclick="onLeftAlignment()"></button>
-                   <button title="Align center" class="font-asm btn fa-solid fa-align-center" onclick="onCenterAlignment()"></button>
-                   <button title="Align right" class="font-asm btn fa-solid fa-align-right" onclick="onRightAlignment()"></button>
-
-
-                   
-                   <a
-                      title="Download"
-                       href="#"
-                       class="btn download btn fa-solid fa-cloud-arrow-up"
-                       onclick="onDownloadCanvas(this)"
-                       download="my-img.jpg"
-                       ></a
-                   >
+               <button
+                    title="Delete Line"
+                    class="delete-line btn"
+                    onclick="onDeleteLine()"
+                >
+                    🗑️
+                </button>
+                <button
+                    class="switch-line btn"
+                    onclick="onSwitchLine()"
+                    title="Switch line"
+                >
+                    🔃
+                </button>
+                <button
+                    title="Add Line"
+                    class="add-line btn"
+                    onclick="onAddLine()"
+                >
+                    ➕
+                </button>
+                <div class="font-modifier full-line">
+                <button
+                    class="increase btn"
+                    onclick="onIncrease()"
+                    title="Increase font size"
+                >
+                    A+
+                </button>
+                <button
+                    class="decrease btn"
+                    onclick="onDecrease()"
+                    title="Decrease font size"
+                >
+                    A-
+                </button>
+                <label class="color-btn btn" title="Choose font color">
+                    <input
+                        type="color"
+                        id="color-input"
+                        oninput="onSetColor(this.value)"
+                        class="color"
+                    />🎨</label
+                >
+                
+                <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
+                <button
+                    title="Align left"
+                    class="font-asm btn fa-solid fa-align-left"
+                    onclick="onLeftAlignment()"
+                ></button>
+                <button
+                    title="Align center"
+                    class="font-asm btn fa-solid fa-align-center"
+                    onclick="onCenterAlignment()"
+                ></button>
+                <button
+                    title="Align right"
+                    class="font-asm btn fa-solid fa-align-right"
+                    onclick="onRightAlignment()"
+                ></button>
+                
+                <button
+                    title="Move text up"
+                    class="move-up btn"
+                    onclick="onMoveUp()"
+                >
+                    ⬆️
+                </button>
+                <button
+                    title="Move text down"
+                    class="move-down btn"
+                    onclick="onMoveDown()"
+                >
+                    ⬇️
+                </button>
+                <select id="fontSelect" onchange="onChangeFont(this.value)">
+                    <option selected value="Arial" style="font-family: Arial">
+                        Arial
+                    </option>
+                    <option
+                        value="Times New Roman"
+                        style="font-family: 'Times New Roman'"
+                    >
+                        Times New Roman
+                    </option>
+                    <option
+                        value="Courier New"
+                        style="font-family: 'Courier New'"
+                    >
+                        Courier New
+                    </option>
+                    <option value="Georgia" style="font-family: Georgia">
+                        Georgia
+                    </option>
+                    <option value="Verdana" style="font-family: Verdana">
+                        Verdana
+                    </option>
+                    <option value="Tahoma" style="font-family: Tahoma">
+                        Tahoma
+                    </option>
+                    <option
+                        value="Trebuchet MS"
+                        style="font-family: 'Trebuchet MS'"
+                    >
+                        Trebuchet MS
+                    </option>
+                    <option value="Helvetica" style="font-family: Helvetica">
+                        Helvetica
+                    </option>
+                </select>
+</div>
+                <a
+                    title="Download"
+                    href="#"
+                    class="btn download btn fa-solid fa-cloud-arrow-up"
+                    onclick="onDownloadCanvas(this)"
+                    download="my-img.jpg"
+                ></a>
             </section>
         </main>
         <main class="about hidden">
-           <h1>Meme Generator</h1>
-           <p class="about-txt">
-      This project was created by Shaked Livyani as a part of coding academy course. <br>
-      in this application you can create your own Meme! <br>
-       this project uses Canvas, a new property of HTML 
-      </p>
-      <img src="meme-imgs/Shaked.jpg" alt="" class="shaked">
-      <p class="about-txt">All rights reserved</p>
-   </main>
-   <footer class="footer">Made by Shaked Livyani</footer>
+            <h1>Meme Generator</h1>
+            <p class="about-txt">
+                This project was created by Shaked Livyani as a part of coding
+                academy course. <br />
+                in this application you can create your own Meme! <br />
+                this project uses Canvas, a new element of HTML
+            </p>
+            <img src="meme-imgs/Shaked.jpg" alt="" class="shaked" />
+            <p class="about-txt rights">All rights reserved</p>
+        </main>
+        <footer class="footer">Made by Shaked Livyani</footer>
         <script src="js/storage.service.js"></script>
         <script src="js/meme-service.js"></script>
         <script src="js/meme-controller.js"></script>

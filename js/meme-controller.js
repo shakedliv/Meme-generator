@@ -18,90 +18,25 @@ function renderMeme() {
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => {
-            drawText(line, idx)
+            drawText(line, idx,line.font)
         })
+       
         renderFrame()
     }
 }
 
-function drawText(line, idx) {
+function drawText(line, idx, font) {
     const text = line.txt
     gCtx.beginPath()
     gCtx.lineWidth = 0.5
     gCtx.strokeStyle = 'white'
     gCtx.fillStyle = line.color
-    gCtx.font = line.size + 'px Arial'
+    gCtx.font = line.size + 'px ' + font
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
     alignLine(text, idx, line)
 }
 
-function renderTxtBox() {
-    const meme = getMeme()
-    const elTextInput = document.querySelector('#text-input')
-    elTextInput.value = meme.lines[meme.selectedLineIdx].txt
-}
-
-function renderFrame() {
-    const meme = getMeme()
-    const currLine = meme.lines[meme.selectedLineIdx]
-    if (!currLine.txt) return
-    gCtx.beginPath()
-    gCtx.strokeStyle = 'yellow'
-    const width = gCtx.measureText(currLine.txt).width
-    const hight = currLine.size * 2
-
-    gCtx.strokeRect(
-        currLine.txtLocation.x - width / 2 - 10,
-        currLine.txtLocation.y - currLine.size,
-        width + 20,
-        hight
-    )
-    setTxtLocation(currLine, width, hight)
-}
-
-
-// operation buttons:
-
-function onDeleteLine() {
-   deleteCurrLine()
-   renderTxtBox()
-   renderMeme()
-}
-
-function onSwitchLine() {
-    switchLine()
-    renderTxtBox()
-    renderMeme()
-}
-
-function changeFont(font) {
-    console.log('font:', font)
-    const elCanvas = document.querySelector('.canvas-container')
-    elCanvas.style.fontFamily = font
-}
-
-function onLeftAlignment() {
-    gIsRight = false
-    gIsLeft = true
-    renderMeme()
-}
-
-function onCenterAlignment() {
-    gIsRight = false
-    gIsLeft = false
-    renderMeme()
-}
-
-function onRightAlignment() {
-    gIsRight = true
-    gIsLeft = false
-    renderMeme()
-}
-
-//problem: align all the line and not just selected
-// also need to set the line in the correct place after with setTxtLocation(currLine, width, hight)
-// separate to smaller functions
 function alignLine(text, idx, line) {
     line.txtLocation = {}
     if (gIsLeft) {
@@ -137,6 +72,77 @@ function alignLine(text, idx, line) {
     setTxtSize()
 }
 
+
+
+function renderFrame() {
+    const meme = getMeme()
+    const currLine = meme.lines[meme.selectedLineIdx]
+    if (!currLine.txt) return
+    gCtx.beginPath()
+    gCtx.strokeStyle = 'yellow'
+    const width = gCtx.measureText(currLine.txt).width
+    const hight = currLine.size * 2
+
+    gCtx.strokeRect(
+        currLine.txtLocation.x - width / 2 - 10,
+        currLine.txtLocation.y - currLine.size,
+        width + 20,
+        hight
+    )
+    setTxtLocation(currLine, width, hight)
+}
+
+
+// operation buttons:
+
+function onDeleteLine() {
+   deleteCurrLine()
+   renderTxtBox()
+   renderMeme()
+}
+
+function onMoveUp() {
+   moveUp()
+   // renderMeme()
+}
+function onMoveDown() {
+   moveDown()
+   // renderMeme()
+}
+
+function onSwitchLine() {
+    switchLine()
+    renderTxtBox()
+    renderMeme()
+}
+
+function changeFont(font) {
+    console.log('font:', font)
+   gMeme.lines[gMeme.selectedLineIdx].font = font
+}
+
+function onLeftAlignment() {
+    gIsRight = false
+    gIsLeft = true
+    renderMeme()
+}
+
+function onCenterAlignment() {
+    gIsRight = false
+    gIsLeft = false
+    renderMeme()
+}
+
+function onRightAlignment() {
+    gIsRight = true
+    gIsLeft = false
+    renderMeme()
+}
+
+//problem: align all the line and not just selected
+// also need to set the line in the correct place after with setTxtLocation(currLine, width, hight)
+// separate to smaller functions
+
 function onDownloadCanvas(elLink) {
     const elCanvas = gElCanvas.toDataURL('image/jpeg')
     elLink.href = elCanvas
@@ -157,9 +163,15 @@ function onDecrease() {
     renderMeme()
 }
 
+function onChangeFont(value) {
+   changeFont(value)
+   renderMeme()
+}
+
 function onAddLine() {
-    
-    addLine()
+   addLine()
+   const elTextInput = document.querySelector('#text-input')
+   elTextInput.value = ''
     renderMeme()
 }
 
@@ -232,4 +244,16 @@ function resizeCanvas() {
 
 function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function renderFontFamily() {
+   const meme = getMeme()
+   const elFontFamily = document.querySelector('#fontSelect')
+   elFontFamily.value = meme.lines[meme.selectedLineIdx].font
+}
+
+function renderTxtBox() {
+    const meme = getMeme()
+    const elTextInput = document.querySelector('#text-input')
+    elTextInput.value = meme.lines[meme.selectedLineIdx].txt
 }

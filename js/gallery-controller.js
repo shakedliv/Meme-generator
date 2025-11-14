@@ -37,9 +37,11 @@ function openGallery() {
    elGallery.classList.remove('hidden')
    const elEditor = document.querySelector('.editor')
    elEditor.classList.add('hidden')
-   renderMeme()
+   const elAbout = document.querySelector('.about')
+   elAbout.classList.add('hidden')
+   onClearCanvas()
+   clearMeme()
 }
-
 function showAbout() {
    const elGallery = document.querySelector('.gallery')
    elGallery.classList.add('hidden')
