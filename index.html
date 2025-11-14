@@ -27,7 +27,7 @@
 
         <main class="editor hidden">
             <section class="canvas-container">
-                <canvas width="450" height="450" class="meme-canvas" onclick="onPressLine(event)"> </canvas>
+                <canvas width="450" height="450" class="meme-canvas" onclick="onCanvasClick(event)"> </canvas>
             </section>
 
             <section class="operations">
@@ -57,6 +57,7 @@
                      class="color"
                      />🎨</label>
                    <button title="Add Line" class="add-line btn" onclick="onAddLine()">➕</button>
+                   <button title="Delete Line" class="delete-line btn" onclick="onDeleteLine()">🗑️</button>
                    <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
                    <button title="Align left" class="font-asm btn fa-solid fa-align-left" onclick="onLeftAlignment()"></button>
                    <button title="Align center" class="font-asm btn fa-solid fa-align-center" onclick="onCenterAlignment()"></button>

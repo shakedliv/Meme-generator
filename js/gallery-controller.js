@@ -1,6 +1,7 @@
 'use strict'
 function onInit() {
    renderGallery()
+  renderMeme()
    
 }
 function renderGallery() {

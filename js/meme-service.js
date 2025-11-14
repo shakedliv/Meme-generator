@@ -106,18 +106,25 @@ var gMeme = {
 }
 
 var gKeywordSearchCountMap = { Funny: 12, cat: 6, Babies: 4 }
-
+// ------------------
+// Data getters
+// ------------------
 function getMeme() {
     return gMeme
 }
+
 function getImages() {
     return gImgs
 }
-// returns an img obj in a specified id
+
+// returns an img obj by id
 function findImg(imgId) {
     return gImgs.find((img) => img.id === imgId)
 }
 
+// ------------------
+// setters
+// ------------------
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
 }
@@ -129,40 +136,76 @@ function setLineTxt(text) {
 function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
-
-function decreaseFontSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size--
-}
-function increaseFontSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size++
-}
-function addLine() {
-    gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
-    gMeme.selectedLineIdx++
-}
-
-function switchLine() {
-    if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
-        gMeme.selectedLineIdx = 0
-    else gMeme.selectedLineIdx++
-}
-function setTxtSize() {
-    gMeme.lines[gMeme.selectedLineIdx].txtSize =
-        gMeme.lines[gMeme.selectedLineIdx].txt.length *
-        gMeme.lines[gMeme.selectedLineIdx].size // calc the txt size
+function deleteCurrLine() {
+   gMeme.lines[gMeme.selectedLineIdx].txt = ''
 }
 
 function setLocation(lineLocation) {
     gMeme.lines[gMeme.selectedLineIdx].txtLocation = lineLocation
 }
 
-function alignLineLeft() {
-   
+function setSelectedLine(idx) {
+    if (idx == null) return
+    gMeme.selectedLineIdx = idx
 }
-function alignLineInCenter() {
-   
+
+// ------------------
+// Line operations
+// ------------------
+function decreaseFontSize() {
+    gMeme.lines[gMeme.selectedLineIdx].size--
 }
-function alignLineRight() {
-   
+
+function increaseFontSize() {
+    gMeme.lines[gMeme.selectedLineIdx].size++
 }
+
+function addLine() {
+    gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function switchLine() {
+    if (gMeme.selectedLineIdx + 1 === gMeme.lines.length) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+}
+
+function setTxtSize() {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.txtSize = line.txt.length * line.size // calc the txt size
+}
+
+function setLocation(lineLocation) {
+    gMeme.lines[gMeme.selectedLineIdx].txtLocation = lineLocation
+}
+
+function alignLineLeft() {}
+function alignLineInCenter() {}
+function alignLineRight() {}
+
+function setTxtLocation(currLine, width, hight) {
+    currLine.startX = currLine.txtLocation.x - width / 2 - 10
+    currLine.startY = currLine.txtLocation.y - currLine.size
+    currLine.endX = currLine.startX + width + 20
+    currLine.endY = currLine.startY + hight
+}
+
+function selectLine(clickedPos) {
+    // clickedPos{x: y:}
+    const foundLine = gMeme.lines.find((line, index) => {
+       if (
+          line.startX <= clickedPos.x &&
+          clickedPos.x <= line.endX &&
+          line.startY <= clickedPos.y &&
+          clickedPos.y <= line.endY
+       ) {
+          gMeme.selectedLineIdx = index
+          console.log('index:', index)
+          console.log('line:', line)
+          return line
+       }
+    })
+    return foundLine
+}
+
 
