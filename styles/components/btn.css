@@ -1,15 +1,17 @@
 .btn {
-    padding: 0.7em 1em;
-    /* margin: 1em; */
+    padding: 0.4em 0.6em;
+    margin-bottom: 0.5em;
+    margin-inline: 0.5vw;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
 
-    background-color: #5f6d6b; 
+    background-color: #50a4b1; 
     color: #252525; 
 
     transition: background-color 0.3s ease, transform 0.1s ease; 
+     
 }
 
 .btn:hover {

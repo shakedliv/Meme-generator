@@ -13,14 +13,108 @@
     <body onload="onInit()" class="main-layout">
         <header class="header flex">
             <img class="logo" src="/meme-imgs/LOGO.png" />
-            <nav>
-                <button onclick="openGallery()">Gallery</button>
+            <nav class="menu">
+                <button class="menu-button" onclick="openGallery()">
+                    Gallery
+                </button>
                 <!-- <button onclick="showSavedMemes()">Saved</button> -->
-                <button onclick="showAbout()">About</button>
+                <button class="menu-button" onclick="showAbout()">About</button>
+                <!-- <input type="file" id="upload" class="file-input btn" name="image" onchange="onImgInput(event)" /> -->
             </nav>
-            <!-- <button class="btn-toggle-menu btn" onclick="toggleMenu()">☰</button> -->
+            <!-- <button class="btn-toggle-menu menu-button" onclick="toggleMenu()">☰</button> -->
         </header>
-
+        <section class="search-meme">
+            <input
+                class="search-meme-input"
+                list="searchMeme"
+                placeholder="Search by keywords"
+                oninput="filterByKeyword(this.value)"
+            />
+            <datalist id="searchMeme">
+                <option value="Funny"></option>
+                <option value="Politics"></option>
+                <option value="Babies"></option>
+                <option value="Dogs"></option>
+                <option value="Cats"></option>
+                <option value="TV"></option>
+                <option value="Movie"></option>
+                <option value="Outrages"></option>
+                <option value="Mysterious"></option>
+                <option value="Serious"></option>
+            </datalist>
+            <div class="keywords">
+                <button
+                    class="keyword"
+                    value="politics"
+                    onclick="increaseKeyword(this.value)"
+                >
+                    Politics
+                </button>
+                <button
+                    class="keyword"
+                    value="babies"
+                    onclick="increaseKeyword(this.value)"
+                >
+                    Babies
+                </button>
+                <button
+                class="keyword"
+                value="cats"
+                onclick="increaseKeyword(this.value)"
+                >
+                    Cats
+                </button>
+                <button
+                    class="keyword"
+                    value="TV"
+                    onclick="increaseKeyword(this.value)"
+                >
+                    TV
+                </button>
+                <button
+                    class="keyword"
+                    value="funny"
+                    onclick="increaseKeyword(this.value)"
+                    >
+                    Funny
+                  </button>
+                  <button
+                  class="keyword"
+                  value="movie"
+                  onclick="increaseKeyword(this.value)"
+                  >
+                  Movie
+               </button>
+               <button
+               class="keyword"
+               value="outrages"
+               onclick="increaseKeyword(this.value)"
+               >
+               Outrages
+            </button>
+            <button
+            class="keyword"
+            value="mysterious"
+            onclick="increaseKeyword(this.value)"
+            >
+            Mysterious
+         </button>
+         <button
+             class="keyword"
+             value="dogs"
+             onclick="increaseKeyword(this.value)"
+         >
+             Dogs
+         </button>
+                <button
+                class="keyword"
+                value="serious"
+                onclick="increaseKeyword(this.value)"
+                >
+                Serious
+               </button>
+            </div>
+        </section>
         <main class="gallery grid"></main>
 
         <main class="editor hidden">
@@ -43,125 +137,147 @@
                     oninput="onSetLineTxt(this.value)"
                     placeholder="enter text here"
                 />
-               <button
-                    title="Delete Line"
-                    class="delete-line btn"
-                    onclick="onDeleteLine()"
-                >
-                    🗑️
-                </button>
-                <button
-                    class="switch-line btn"
-                    onclick="onSwitchLine()"
-                    title="Switch line"
-                >
-                    🔃
-                </button>
-                <button
-                    title="Add Line"
-                    class="add-line btn"
-                    onclick="onAddLine()"
-                >
-                    ➕
-                </button>
+                <div class="upper-modifier">
+                    <button
+                        title="Move text down"
+                        class="move-down btn"
+                        onclick="onMoveDown()"
+                    >
+                        ⬇️
+                    </button>
+                    <button
+                        title="Delete Line"
+                        class="delete-line btn"
+                        onclick="onDeleteLine()"
+                    >
+                        🗑️
+                    </button>
+                    <button
+                        class="switch-line btn"
+                        onclick="onSwitchLine()"
+                        title="Switch line"
+                    >
+                        🔃
+                    </button>
+                    <button
+                        title="Add Line"
+                        class="add-line btn"
+                        onclick="onAddLine()"
+                    >
+                        ➕
+                    </button>
+                    <button
+                        title="Move text up"
+                        class="move-up btn"
+                        onclick="onMoveUp()"
+                    >
+                        ⬆️
+                    </button>
+                </div>
                 <div class="font-modifier full-line">
-                <button
-                    class="increase btn"
-                    onclick="onIncrease()"
-                    title="Increase font size"
-                >
-                    A+
-                </button>
-                <button
-                    class="decrease btn"
-                    onclick="onDecrease()"
-                    title="Decrease font size"
-                >
-                    A-
-                </button>
-                <label class="color-btn btn" title="Choose font color">
-                    <input
-                        type="color"
-                        id="color-input"
-                        oninput="onSetColor(this.value)"
-                        class="color"
-                    />🎨</label
-                >
-                
-                <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
-                <button
-                    title="Align left"
-                    class="font-asm btn fa-solid fa-align-left"
-                    onclick="onLeftAlignment()"
-                ></button>
-                <button
-                    title="Align center"
-                    class="font-asm btn fa-solid fa-align-center"
-                    onclick="onCenterAlignment()"
-                ></button>
-                <button
-                    title="Align right"
-                    class="font-asm btn fa-solid fa-align-right"
-                    onclick="onRightAlignment()"
-                ></button>
-                
-                <button
-                    title="Move text up"
-                    class="move-up btn"
-                    onclick="onMoveUp()"
-                >
-                    ⬆️
-                </button>
-                <button
-                    title="Move text down"
-                    class="move-down btn"
-                    onclick="onMoveDown()"
-                >
-                    ⬇️
-                </button>
-                <select id="fontSelect" onchange="onChangeFont(this.value)">
-                    <option selected value="Arial" style="font-family: Arial">
-                        Arial
-                    </option>
-                    <option
-                        value="Times New Roman"
-                        style="font-family: 'Times New Roman'"
+                    <button
+                        class="increase btn"
+                        onclick="onIncrease()"
+                        title="Increase font size"
                     >
-                        Times New Roman
-                    </option>
-                    <option
-                        value="Courier New"
-                        style="font-family: 'Courier New'"
+                        A+
+                    </button>
+                    <button
+                        class="decrease btn"
+                        onclick="onDecrease()"
+                        title="Decrease font size"
                     >
-                        Courier New
-                    </option>
-                    <option value="Georgia" style="font-family: Georgia">
-                        Georgia
-                    </option>
-                    <option value="Verdana" style="font-family: Verdana">
-                        Verdana
-                    </option>
-                    <option value="Tahoma" style="font-family: Tahoma">
-                        Tahoma
-                    </option>
-                    <option
-                        value="Trebuchet MS"
-                        style="font-family: 'Trebuchet MS'"
+                        A-
+                    </button>
+                    <label class="color-btn btn" title="Choose font color">
+                        <input
+                            type="color"
+                            id="color-input"
+                            oninput="onSetColor(this.value)"
+                            class="color"
+                        />🎨</label
                     >
-                        Trebuchet MS
-                    </option>
-                    <option value="Helvetica" style="font-family: Helvetica">
-                        Helvetica
-                    </option>
-                </select>
-</div>
-                <a
-                    title="Download"
-                    href="#"
-                    class="btn download btn fa-solid fa-cloud-arrow-up"
-                    onclick="onDownloadCanvas(this)"
-                    download="my-img.jpg"
-                ></a>
+
+                    <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
+                    <button
+                        title="Align left"
+                        class="font-asm btn fa-solid fa-align-left"
+                        onclick="onLeftAlignment()"
+                    ></button>
+                    <button
+                        title="Align center"
+                        class="font-asm btn fa-solid fa-align-center"
+                        onclick="onCenterAlignment()"
+                    ></button>
+                    <button
+                        title="Align right"
+                        class="font-asm btn fa-solid fa-align-right"
+                        onclick="onRightAlignment()"
+                    ></button>
+
+                    <select id="fontSelect" onchange="onChangeFont(this.value)">
+                        <option
+                            selected
+                            value="Arial"
+                            style="font-family: Arial"
+                        >
+                            Arial
+                        </option>
+                        <option
+                            value="Times New Roman"
+                            style="font-family: 'Times New Roman'"
+                        >
+                            Times New Roman
+                        </option>
+                        <option
+                            value="Courier New"
+                            style="font-family: 'Courier New'"
+                        >
+                            Courier New
+                        </option>
+                        <option value="Georgia" style="font-family: Georgia">
+                            Georgia
+                        </option>
+                        <option value="Verdana" style="font-family: Verdana">
+                            Verdana
+                        </option>
+                        <option value="Tahoma" style="font-family: Tahoma">
+                            Tahoma
+                        </option>
+                        <option
+                            value="Trebuchet MS"
+                            style="font-family: 'Trebuchet MS'"
+                        >
+                            Trebuchet MS
+                        </option>
+                        <option
+                            value="Helvetica"
+                            style="font-family: Helvetica"
+                        >
+                            Helvetica
+                        </option>
+                    </select>
+                </div>
+                <div class="lower-modifier">
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data"
+                        onsubmit="onShareImg(event)"
+                        title="Share to facebook"
+                    >
+                        <button class="btn" type="submit">
+                            Share to facebook
+                        </button>
+                    </form>
+                    <a
+                        title="Download"
+                        href="#"
+                        class="btn download btn"
+                        onclick="onDownloadCanvas(this)"
+                        download="my-img.jpg"
+                        >Download</a
+                    >
+                </div>
             </section>
         </main>
         <main class="about hidden">
@@ -178,7 +294,9 @@
         <footer class="footer">Made by Shaked Livyani</footer>
         <script src="js/storage.service.js"></script>
         <script src="js/meme-service.js"></script>
+        <script src="js/share-service.js"></script>
         <script src="js/meme-controller.js"></script>
         <script src="js/gallery-controller.js"></script>
+        <script src="js/upload-img.js"></script>
     </body>
 </html>

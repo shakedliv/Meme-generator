@@ -4,22 +4,22 @@ var gImgs = [
     {
         id: 1,
         url: 'meme-imgs/meme-imgs(square)/1.jpg',
-        keywords: ['Funny', 'politics'],
+        keywords: ['Funny', 'Politics'],
     },
     {
         id: 2,
         url: 'meme-imgs/meme-imgs(square)/2.jpg',
-        keywords: ['dogs', 'cute'],
+        keywords: ['Dogs', 'Cute'],
     },
     {
         id: 3,
         url: 'meme-imgs/meme-imgs(square)/3.jpg',
-        keywords: ['dogs', 'cute', 'Babies'],
+        keywords: ['Dogs', 'Cute', 'Babies'],
     },
     {
         id: 4,
         url: 'meme-imgs/meme-imgs(square)/4.jpg',
-        keywords: ['Cats', 'cute'],
+        keywords: ['Cats', 'Cute'],
     },
     {
         id: 5,
@@ -34,27 +34,27 @@ var gImgs = [
     {
         id: 7,
         url: 'meme-imgs/meme-imgs(square)/7.jpg',
-        keywords: ['Babies', 'cute', 'Funny'],
+        keywords: ['Babies', 'Cute', 'Funny'],
     },
     {
         id: 8,
         url: 'meme-imgs/meme-imgs(square)/8.jpg',
-        keywords: ['mysterious', 'Happy'],
+        keywords: ['Mysterious', 'Happy'],
     },
     {
         id: 9,
         url: 'meme-imgs/meme-imgs(square)/9.jpg',
-        keywords: ['Babies', 'cute', 'Funny', 'Happy'],
+        keywords: ['Babies', 'Cute', 'Funny', 'Happy'],
     },
     {
         id: 10,
         url: 'meme-imgs/meme-imgs(square)/10.jpg',
-        keywords: ['Funny', 'politics', 'Happy'],
+        keywords: ['Funny', 'Politics', 'Happy'],
     },
     {
         id: 11,
         url: 'meme-imgs/meme-imgs(square)/11.jpg',
-        keywords: ['Funny', 'outrages'],
+        keywords: ['Funny', 'Outrages'],
     },
     {
         id: 12,
@@ -84,7 +84,7 @@ var gImgs = [
     {
         id: 17,
         url: 'meme-imgs/meme-imgs(square)/17.jpg',
-        keywords: ['politics', 'Serious'],
+        keywords: ['Politics', 'Serious'],
     },
     {
         id: 18,
@@ -101,12 +101,14 @@ var gMeme = {
             txt: '',
             size: 30,
             color: 'black',
-            font: 'Arial'
+            font: 'Arial',
+            txtLocation: {},
+            alignment: 'center', // 'left', 'center', or 'right'
         },
     ],
 }
-
-var gKeywordSearchCountMap = { Funny: 12, cat: 6, Babies: 4 }
+// "Serious","Funny","Politics","Babies","Dogs","Cats","TV","Movie","Outrages","Mysterious"
+var gKeywordSearchCountMap = { funny: 55, cats: 16, babies: 44,dogs: 42, TV:32 ,movie:19,politics:22,serious:15,mysterious:32, outrages:24}
 // ------------------
 // Data getters
 // ------------------
@@ -116,6 +118,14 @@ function getMeme() {
 
 function getImages() {
     return gImgs
+}
+
+function getGKeywords() {
+    return gKeywordSearchCountMap
+}
+
+function increaseKeywordValue(val) {
+   gKeywordSearchCountMap[val]++
 }
 
 // returns an img obj by id
@@ -129,6 +139,13 @@ function findImg(imgId) {
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
 }
+function setUserImg(imgUrl) {
+    const imgId = gImgs.length - 1
+   gImgs.push({ id: imgId, url: imgUrl })
+   console.log('imgId:', imgId)
+   setImg(imgId)
+   console.log('gMeme:', gMeme.selectedImgId)
+}
 
 function setLineTxt(text) {
     gMeme.lines[gMeme.selectedLineIdx].txt = text
@@ -138,7 +155,7 @@ function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 function deleteCurrLine() {
-   gMeme.lines[gMeme.selectedLineIdx].txt = ''
+    gMeme.lines[gMeme.selectedLineIdx].txt = ''
 }
 
 function setLocation(lineLocation) {
@@ -162,12 +179,20 @@ function increaseFontSize() {
 }
 
 function addLine() {
-    gMeme.lines.push({ txt: 'another text', size: 30, color: 'black' })
+    gMeme.lines.push({
+        txt: 'another text',
+        size: 30,
+        color: 'black',
+        font: 'Arial',
+        txtLocation: {},
+        alignment: 'center', // default to center alignment
+    })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
 function switchLine() {
-    if (gMeme.selectedLineIdx + 1 === gMeme.lines.length) gMeme.selectedLineIdx = 0
+    if (gMeme.selectedLineIdx + 1 === gMeme.lines.length)
+        gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
 }
 
@@ -178,6 +203,13 @@ function setTxtSize() {
 
 function setLocation(lineLocation) {
     gMeme.lines[gMeme.selectedLineIdx].txtLocation = lineLocation
+}
+
+function setLineAlignment(alignment) {
+    if (!alignment || !['left', 'center', 'right'].includes(alignment)) {
+        return
+    }
+    gMeme.lines[gMeme.selectedLineIdx].alignment = alignment
 }
 
 function alignLineLeft() {}
@@ -194,45 +226,43 @@ function setTxtLocation(currLine, width, hight) {
 function selectLine(clickedPos) {
     // clickedPos{x: y:}
     const foundLine = gMeme.lines.find((line, index) => {
-       if (
-          line.startX <= clickedPos.x &&
-          clickedPos.x <= line.endX &&
-          line.startY <= clickedPos.y &&
-          clickedPos.y <= line.endY
-       ) {
-          gMeme.selectedLineIdx = index
-          console.log('index:', index)
-          console.log('line:', line)
-          return line
-       }
+        if (
+            line.startX <= clickedPos.x &&
+            clickedPos.x <= line.endX &&
+            line.startY <= clickedPos.y &&
+            clickedPos.y <= line.endY
+        ) {
+            gMeme.selectedLineIdx = index
+            console.log('index:', index)
+            console.log('line:', line)
+            return line
+        }
     })
     return foundLine
 }
 
 function moveUp() {
-   const currLine = gMeme.lines[gMeme.selectedLineIdx]
-   if (currLine.txt = '') return
-   currLine.startY--
-   currLine.endY--
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    if (!currLine || !currLine.txt) return
+    // move the line up by a few pixels
+    currLine.txtLocation.y -= 5
 }
 function moveDown() {
-   const currLine = gMeme.lines[gMeme.selectedLineIdx]
-   if (currLine.txt = '') return
-   currLine.startY++
-   currLine.endY++
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    if (!currLine || !currLine.txt) return
+    currLine.txtLocation.y += 5
 }
 
-
 function clearMeme() {
-   gMeme.selectedLineIdx = 0
-   gMeme.lines = [
+    gMeme.selectedLineIdx = 0
+    gMeme.lines = [
         {
             txt: '',
             size: 30,
             color: 'black',
-            font: 'Arial'
+            font: 'Arial',
         },
-   ]
-   renderTxtBox()
-   renderFontFamily()
+    ]
+    renderTxtBox()
+    renderFontFamily()
 }

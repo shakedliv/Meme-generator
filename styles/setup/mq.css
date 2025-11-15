@@ -1,4 +1,4 @@
-@media (max-width: 640px) {
+@media (max-width: 700px) {
 }
 
 /* Small BP */
@@ -10,6 +10,21 @@
    .editor{
       flex-direction: row;
    }
+   .btn{
+    padding: 0.7em 1em;
+margin-bottom:1em;
+   }
+   #text-input{
+      margin-bottom: 1em;
+   }
+   .font-modifier{
+      padding: 1.5em;
+   }
+   .search-meme-input{
+      padding-inline-start: 1em;
+      padding-inline-end: 3em;
+   }
+
 }
 
 /* Large BP */

@@ -1,12 +1,10 @@
 'use strict'
 let gElCanvas
 let gCtx
-let gIsLeft = false
-let gIsRight = false
 
 //rendering functions
 
-function renderMeme() {
+function renderMeme(isDownload = false) {
     const meme = getMeme()
     const memeImg = findImg(meme.selectedImgId)
     const elImg = new Image()
@@ -18,10 +16,10 @@ function renderMeme() {
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         meme.lines.forEach((line, idx) => {
-            drawText(line, idx,line.font)
+            drawText(line, idx, line.font)
         })
-       
-        renderFrame()
+
+        if (!isDownload) renderFrame()
     }
 }
 
@@ -31,55 +29,57 @@ function drawText(line, idx, font) {
     gCtx.lineWidth = 0.5
     gCtx.strokeStyle = 'white'
     gCtx.fillStyle = line.color
-    gCtx.font = line.size + 'px ' + font
+    // ensure font is valid; default to Arial if not provided
+    const fontFamily = font || 'Arial'
+    gCtx.font = line.size + 'px ' + fontFamily
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
     alignLine(text, idx, line)
 }
 
 function alignLine(text, idx, line) {
-    line.txtLocation = {}
-    if (gIsLeft) {
+    // preserve existing txtLocation and only update x coordinate
+    if (!line.txtLocation) line.txtLocation = {}
+
+    // determine alignment for this line (use line.alignment property)
+    const alignment = line.alignment || 'center'
+
+    if (alignment === 'left') {
         line.txtLocation.x = gElCanvas.width / 6
-        console.log('left :', gElCanvas.width / 6)
-    } else if (gIsRight) {
+    } else if (alignment === 'right') {
         line.txtLocation.x = gElCanvas.width - gElCanvas.width / 6
-        console.log('right :', gElCanvas.width - gElCanvas.width / 6)
     } else {
+        // default to center
         line.txtLocation.x = gElCanvas.width / 2
-        console.log('center :', gElCanvas.width / 2)
     }
-    switch (idx) {
-        case 0:
-            line.txtLocation.y = gElCanvas.height / 6
-            gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
-            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
-            break
-        case 1:
-            line.txtLocation.y = gElCanvas.height - gElCanvas.height / 6
-            line.txtLocation = line.txtLocation
 
-            gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
-            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
-            break
-        default:
-            line.txtLocation.y = gElCanvas.height / 2
-            line.txtLocation = line.txtLocation
-
-            gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
-            gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
+    // set y based on line index (this part should always run)
+    // only set default y if it wasn't set manually (e.g., by moveUp/moveDown)
+    if (line.txtLocation.y == null) {
+        switch (idx) {
+            case 0:
+                line.txtLocation.y = gElCanvas.height / 6
+                break
+            case 1:
+                line.txtLocation.y = gElCanvas.height - gElCanvas.height / 6
+                break
+            default:
+                line.txtLocation.y = gElCanvas.height / 2
+        }
     }
+
+    // draw the text at the determined location
+    gCtx.fillText(text, line.txtLocation.x, line.txtLocation.y)
+    gCtx.strokeText(text, line.txtLocation.x, line.txtLocation.y)
     setTxtSize()
 }
-
-
 
 function renderFrame() {
     const meme = getMeme()
     const currLine = meme.lines[meme.selectedLineIdx]
     if (!currLine.txt) return
     gCtx.beginPath()
-    gCtx.strokeStyle = 'yellow'
+    gCtx.strokeStyle = 'red'
     const width = gCtx.measureText(currLine.txt).width
     const hight = currLine.size * 2
 
@@ -92,22 +92,21 @@ function renderFrame() {
     setTxtLocation(currLine, width, hight)
 }
 
-
 // operation buttons:
 
 function onDeleteLine() {
-   deleteCurrLine()
-   renderTxtBox()
-   renderMeme()
+    deleteCurrLine()
+    renderTxtBox()
+    renderMeme()
 }
 
 function onMoveUp() {
-   moveUp()
-   // renderMeme()
+    moveUp()
+    renderMeme()
 }
 function onMoveDown() {
-   moveDown()
-   // renderMeme()
+    moveDown()
+    renderMeme()
 }
 
 function onSwitchLine() {
@@ -118,34 +117,30 @@ function onSwitchLine() {
 
 function changeFont(font) {
     console.log('font:', font)
-   gMeme.lines[gMeme.selectedLineIdx].font = font
+    gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
 function onLeftAlignment() {
-    gIsRight = false
-    gIsLeft = true
+    setLineAlignment('left')
     renderMeme()
 }
 
 function onCenterAlignment() {
-    gIsRight = false
-    gIsLeft = false
+    setLineAlignment('center')
     renderMeme()
 }
 
 function onRightAlignment() {
-    gIsRight = true
-    gIsLeft = false
+    setLineAlignment('right')
     renderMeme()
 }
 
-//problem: align all the line and not just selected
-// also need to set the line in the correct place after with setTxtLocation(currLine, width, hight)
-// separate to smaller functions
+
 
 function onDownloadCanvas(elLink) {
+   renderMeme(true)
     const elCanvas = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = elCanvas
+   elLink.href = elCanvas
 }
 
 function onSetColor(color) {
@@ -164,14 +159,14 @@ function onDecrease() {
 }
 
 function onChangeFont(value) {
-   changeFont(value)
-   renderMeme()
+    changeFont(value)
+    renderMeme()
 }
 
 function onAddLine() {
-   addLine()
-   const elTextInput = document.querySelector('#text-input')
-   elTextInput.value = ''
+    addLine()
+    const elTextInput = document.querySelector('#text-input')
+    elTextInput.value = ''
     renderMeme()
 }
 
@@ -184,8 +179,20 @@ function onAddLine() {
 //    console.log(':', loadFromStorage('images'))
 // }
 
+function onShareImg(ev) {
+    ev.preventDefault()
+    const canvasData = gElCanvas.toDataURL('image/jpeg')
 
-
+    // After a succesful upload, allow the user to share on Facebook
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
+        window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`
+        )
+    }
+    uploadImg(canvasData, onSuccess)
+}
 
 //service functions
 
@@ -247,9 +254,9 @@ function onClearCanvas() {
 }
 
 function renderFontFamily() {
-   const meme = getMeme()
-   const elFontFamily = document.querySelector('#fontSelect')
-   elFontFamily.value = meme.lines[meme.selectedLineIdx].font
+    const meme = getMeme()
+    const elFontFamily = document.querySelector('#fontSelect')
+    elFontFamily.value = meme.lines[meme.selectedLineIdx].font
 }
 
 function renderTxtBox() {
