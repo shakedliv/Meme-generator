@@ -1,6 +1,3 @@
-/* SETUP */
-@import url('/styles/setup/vars.css');
-@import url('/styles/setup/typography.css');
 
 /* BASICS */
 @import url('/styles/basics/base.css');
