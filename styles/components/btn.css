@@ -1,12 +1,11 @@
 .btn {
-    padding: 0.4em 0.6em;
     margin-bottom: 0.5em;
     margin-inline: 0.5vw;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-
+    font-size: 1em;
+   padding: 0.2em;
     background-color: #50a4b1; 
     color: #252525; 
 

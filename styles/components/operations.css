@@ -1,0 +1,99 @@
+
+.operations {
+    display: flex;
+    flex-direction: column;
+
+    place-items: center;
+    place-content: center;
+
+    background: linear-gradient(0.5turn, #4182c4, #232142);
+    /* padding: 1em 0.5em; */
+    border-radius: 20px;
+
+
+    width: 40vw;
+    height: 40vw;
+    min-width: 310px;
+    min-height: 325px;
+    max-width: 430px;
+    max-height: 470px;
+}
+#text-input {
+  margin-bottom: 0.5em;
+    border-radius: 1em;
+    background-color: #d0d8da;
+    height: 4vh;
+    width: 70%;
+    padding-inline: 1em;
+}
+.add-line {
+}
+.delete-line {
+}
+
+.switch-line {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.font-modifier {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: grid;
+    place-items: center;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    background: linear-gradient(0.5turn, #758183, #202766);
+    border-radius: 1em;
+}
+.fa-align-center {
+   grid-column: 2/3;
+   grid-row: 1;
+}
+.fa-align-left {
+   grid-column: 1/1;
+   grid-row: 1;
+
+}
+.fa-align-right {
+   grid-column: 3/4;
+   grid-row: 1;
+
+}
+
+
+
+.increase {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.decrease {
+    grid-column: 1;
+    grid-row: 2;
+}
+.color-btn {
+    grid-column: 2;
+    grid-row: 2;
+}
+#fontSelect{
+   grid-column: 1 / 4;
+   grid-row: 3;
+      border-radius: 1em;
+    background-color: #d0d8da;
+
+
+}
+
+.lower-modifier{
+   display: flex;
+   justify-items: center;
+}
+
+.download {
+    grid-column: 4;
+    grid-row: 2;
+}
+.align{
+   /* padding-inline: 1em !important; */
+}

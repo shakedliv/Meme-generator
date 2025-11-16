@@ -12,7 +12,7 @@
     </head>
     <body onload="onInit()" class="main-layout">
         <header class="header flex">
-            <img class="logo" src="meme-imgs/LOGO.png" />
+            <img class="logo" src="meme-imgs/LOGO.png" onclick="openGallery()" />
             <nav class="menu">
                 <button class="menu-button" onclick="openGallery()">
                     Gallery
@@ -24,92 +24,93 @@
             <!-- <button class="btn-toggle-menu menu-button" onclick="toggleMenu()">☰</button> -->
         </header>
         <section class="search-meme">
-            <input
-                class="search-meme-input"
-                list="searchMeme"
-                placeholder="Search by keywords"
-                oninput="filterByKeyword(this.value)"
-            />
-            <datalist id="searchMeme">
-                <option value="Funny"></option>
-                <option value="Politics"></option>
-                <option value="Babies"></option>
-                <option value="Dogs"></option>
-                <option value="Cats"></option>
-                <option value="TV"></option>
-                <option value="Movie"></option>
-                <option value="Outrages"></option>
-                <option value="Mysterious"></option>
-                <option value="Serious"></option>
+           <input
+           class="search-meme-input"
+           list="searchMeme"
+           placeholder="Search by keywords"
+           oninput="filterByKeyword(this.value)"
+           />
+           <datalist id="searchMeme">
+              <option value="Funny"></option>
+              <option value="Politics"></option>
+              <option value="Babies"></option>
+              <option value="Dogs"></option>
+              <option value="Cats"></option>
+              <option value="TV"></option>
+              <option value="Movie"></option>
+              <option value="Outrages"></option>
+              <option value="Mysterious"></option>
+              <option value="Serious"></option>
             </datalist>
+            <button class="keyword-reset fa-solid fa-trash" onclick="resetKeyword()"></button>
             <div class="keywords">
                 <button
                     class="keyword"
                     value="politics"
-                    onclick="increaseKeyword(this.value)"
+                    onclick="increaseKeyword(this)"
                 >
                     Politics
                 </button>
                 <button
                     class="keyword"
                     value="babies"
-                    onclick="increaseKeyword(this.value)"
+                    onclick="increaseKeyword(this)"
                 >
                     Babies
                 </button>
                 <button
                 class="keyword"
                 value="cats"
-                onclick="increaseKeyword(this.value)"
+                onclick="increaseKeyword(this)"
                 >
                     Cats
                 </button>
                 <button
                     class="keyword"
                     value="TV"
-                    onclick="increaseKeyword(this.value)"
+                    onclick="increaseKeyword(this)"
                 >
                     TV
                 </button>
                 <button
                     class="keyword"
                     value="funny"
-                    onclick="increaseKeyword(this.value)"
+                    onclick="increaseKeyword(this)"
                     >
                     Funny
                   </button>
                   <button
                   class="keyword"
                   value="movie"
-                  onclick="increaseKeyword(this.value)"
+                  onclick="increaseKeyword(this)"
                   >
                   Movie
                </button>
                <button
                class="keyword"
                value="outrages"
-               onclick="increaseKeyword(this.value)"
+               onclick="increaseKeyword(this)"
                >
                Outrages
             </button>
             <button
             class="keyword"
             value="mysterious"
-            onclick="increaseKeyword(this.value)"
+            onclick="increaseKeyword(this)"
             >
             Mysterious
          </button>
          <button
              class="keyword"
              value="dogs"
-             onclick="increaseKeyword(this.value)"
+             onclick="increaseKeyword(this)"
          >
              Dogs
          </button>
                 <button
                 class="keyword"
                 value="serious"
-                onclick="increaseKeyword(this.value)"
+                onclick="increaseKeyword(this)"
                 >
                 Serious
                </button>
@@ -135,7 +136,7 @@
                     type="text"
                     id="text-input"
                     oninput="onSetLineTxt(this.value)"
-                    placeholder="enter text here"
+                    placeholder="Enter text here"
                 />
                 <div class="upper-modifier">
                     <button
@@ -143,36 +144,38 @@
                         class="move-down btn"
                         onclick="onMoveDown()"
                     >
-                        ⬇️
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                      <button
+                        title="Move text up"
+                        class="move-up btn"
+                        onclick="onMoveUp()"
+                    >
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    
+                    <button
+                        class="switch-line btn"
+                        onclick="onSwitchLine()"
+                        title="Switch line"
+                    ><i class="fa-solid fa-up-down"></i>
                     </button>
                     <button
                         title="Delete Line"
                         class="delete-line btn"
                         onclick="onDeleteLine()"
                     >
-                        🗑️
-                    </button>
-                    <button
-                        class="switch-line btn"
-                        onclick="onSwitchLine()"
-                        title="Switch line"
-                    >
-                        🔃
+                    <i class="fa-solid fa-trash"></i>
+                        
                     </button>
                     <button
                         title="Add Line"
                         class="add-line btn"
                         onclick="onAddLine()"
                     >
-                        ➕
+                        <i class="fa-solid fa-plus"></i>
                     </button>
-                    <button
-                        title="Move text up"
-                        class="move-up btn"
-                        onclick="onMoveUp()"
-                    >
-                        ⬆️
-                    </button>
+                  
                 </div>
                 <div class="font-modifier full-line">
                     <button
@@ -195,25 +198,27 @@
                             id="color-input"
                             oninput="onSetColor(this.value)"
                             class="color"
-                        />🎨</label
+                        />
+                        <i class="fa-solid fa-brush"></i></label
                     >
 
                     <!-- <button class="font-asm btn fa-solid fa-cloud-arrow-up" onclick="saveMeme()"></button> -->
                     <button
                         title="Align left"
-                        class="font-asm btn fa-solid fa-align-left"
+                        class="font-asm btn  align"
                         onclick="onLeftAlignment()"
-                    ></button>
+                    ><i class="fa-solid fa-align-left"></i>
+                  </button>
                     <button
                         title="Align center"
-                        class="font-asm btn fa-solid fa-align-center"
+                        class="font-asm btn  align"
                         onclick="onCenterAlignment()"
-                    ></button>
+                    ><i class="fa-solid fa-align-center"></i></button>
                     <button
                         title="Align right"
-                        class="font-asm btn fa-solid fa-align-right"
+                        class="font-asm btn  align"
                         onclick="onRightAlignment()"
-                    ></button>
+                    ><i class="fa-solid fa-align-right"></i></button>
 
                     <select id="fontSelect" onchange="onChangeFont(this.value)">
                         <option

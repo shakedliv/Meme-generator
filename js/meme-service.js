@@ -108,7 +108,7 @@ var gMeme = {
     ],
 }
 // "Serious","Funny","Politics","Babies","Dogs","Cats","TV","Movie","Outrages","Mysterious"
-var gKeywordSearchCountMap = { funny: 55, cats: 16, babies: 44,dogs: 42, TV:32 ,movie:19,politics:22,serious:15,mysterious:32, outrages:24}
+var gKeywordSearchCountMap = { funny: 38, cats: 16, babies: 36,dogs: 42, TV:32 ,movie:19,politics:22,serious:15,mysterious:32, outrages:24}
 // ------------------
 // Data getters
 // ------------------
@@ -125,6 +125,7 @@ function getGKeywords() {
 }
 
 function increaseKeywordValue(val) {
+   if(gKeywordSearchCountMap[val] < 50)
    gKeywordSearchCountMap[val]++
 }
 
@@ -180,7 +181,7 @@ function increaseFontSize() {
 
 function addLine() {
     gMeme.lines.push({
-        txt: 'another text',
+        txt: 'A nother text',
         size: 30,
         color: 'black',
         font: 'Arial',

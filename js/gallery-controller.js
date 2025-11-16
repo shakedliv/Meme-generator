@@ -66,7 +66,6 @@ function showAbout() {
 
 function filterByKeyword(searchStr) {
     const imgs = getImages()
-
     const FilteredImgs = imgs.filter((img) =>
         img.keywords.some((keyword) =>
             keyword.toLowerCase().includes(searchStr.toLowerCase())
@@ -84,9 +83,15 @@ function renderKeyword() {
 }
 
 
-function increaseKeyword(val) {
+function increaseKeyword(elKeyWord) {
+   const val = elKeyWord.value
    document.querySelector('.search-meme-input').value = val
    filterByKeyword(val)
    increaseKeywordValue(val)
    renderKeyword()
+}
+
+function resetKeyword() {
+   filterByKeyword('')
+    document.querySelector('.search-meme-input').value = ''
 }

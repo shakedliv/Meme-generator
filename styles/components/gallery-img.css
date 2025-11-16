@@ -1,9 +1,12 @@
 
-
-.gallery img{
+.gallery .meme-img{
    width: 100%;
    height: auto;
    object-fit: cover;
-   margin-bottom: 1em;
    border-radius: 20px;
+}
+.gallery .meme-img:hover{
+   cursor: pointer;
+   opacity: 0.7;
+   transform: translateY(-3px); 
 }

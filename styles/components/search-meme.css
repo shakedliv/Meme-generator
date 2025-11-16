@@ -1,0 +1,58 @@
+
+
+.search-meme{
+   display: flex;
+   place-items: center;
+   gap: 1em;
+   margin-bottom: 1em;
+   padding: 1em;
+   background-color: rgb(59, 56, 56); 
+}
+.search-meme-input{
+   height: 3em;
+   width: 7em;
+   border-radius: 1em;
+   background-color: #d0d8da;
+   align-self: center;
+}
+.keyword{
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color:#2b9ebb;
+  cursor: pointer;
+  margin-inline-end:2vw;
+}
+.keyword:hover{
+   transform: translateY(-2px); 
+}
+.keyword:active {
+    transform: translateY(0); 
+  color:#176174;
+
+}
+
+.keyword-reset{
+   background-color: #d0d8da;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.5em;
+    height: fit-content;
+    padding: 0.2em;
+    color: #252525; 
+
+    transition: background-color 0.3s ease, transform 0.1s ease;
+
+}
+.keyword-reset:hover{
+   background-color: #9c0a0a; 
+   transform: translateY(-2px); 
+}
+.keyword-reset:active {
+   background-color: #7a0808; 
+    transform: translateY(0); 
+}
+.keywords{
+}

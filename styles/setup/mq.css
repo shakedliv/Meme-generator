@@ -9,20 +9,28 @@
    }
    .editor{
       flex-direction: row;
+      gap:0.5em;
+     
    }
    .btn{
-    padding: 0.7em 1em;
 margin-bottom:1em;
+font-size: 1em;
+padding: 0.5em;
    }
    #text-input{
       margin-bottom: 1em;
    }
    .font-modifier{
-      padding: 1.5em;
+      padding: 1em;
    }
    .search-meme-input{
-      padding-inline-start: 1em;
-      padding-inline-end: 3em;
+     width: 15em;
+   }
+   .operations{
+       min-height: 440px;
+   }
+   .canvas-container{
+      min-width: 440px;
    }
 
 }
@@ -31,7 +39,13 @@ margin-bottom:1em;
 
 @media (min-width: 1080px) {
     .gallery {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr
-                
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 
     }
+    .editor{
+      gap:4em;
+
+    }
+    .search-meme-input{
+     width: 22em;
+   }
 }
