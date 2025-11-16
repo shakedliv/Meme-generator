@@ -78,9 +78,7 @@ function filterByKeyword(searchStr) {
 function renderKeyword() {
    const keyWordObj = getGKeywords() // {funny:3, TV:2}
    let keywords = document.querySelectorAll('.keyword')
-   console.log('keywords:', keywords)
    keywords.forEach(keyword => {
-      console.log('keyWordObj[keyword.value]:', keyWordObj[keyword.value])
       keyword.style.fontSize = keyWordObj[keyword.value] + 'px'
    });
 }

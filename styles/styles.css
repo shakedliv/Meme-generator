@@ -1,13 +1,13 @@
 
 /* BASICS */
-@import url('/styles/basics/base.css');
-@import url('/styles/basics/layout.css');
-@import url('/styles/basics/helpers.css');
+@import url('basics/base.css');
+@import url('basics/layout.css');
+@import url('basics/helpers.css');
 
 /* COMPONENTS */
-@import url('/styles/components/btn.css');
-@import url('/styles/components/gallery-img.css');
+@import url('components/btn.css');
+@import url('components/gallery-img.css');
 
 
 /* MQ */
-@import url('/styles/setup/mq.css');
+@import url('setup/mq.css');
