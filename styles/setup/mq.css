@@ -23,6 +23,9 @@ padding: 0.5em;
    .font-modifier{
       padding: 1em;
    }
+    .search-meme{
+      gap: 2em;
+   }
    .search-meme-input{
      width: 15em;
    }
@@ -48,4 +51,5 @@ padding: 0.5em;
     .search-meme-input{
      width: 22em;
    }
+
 }

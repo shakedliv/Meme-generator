@@ -26,10 +26,6 @@
     width: 70%;
     padding-inline: 1em;
 }
-.add-line {
-}
-.delete-line {
-}
 
 .switch-line {
     grid-column: 1;
@@ -93,7 +89,4 @@
 .download {
     grid-column: 4;
     grid-row: 2;
-}
-.align{
-   /* padding-inline: 1em !important; */
 }

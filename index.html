@@ -27,7 +27,7 @@
            <input
            class="search-meme-input"
            list="searchMeme"
-           placeholder="Search by keywords"
+           placeholder="Search by keyword"
            oninput="filterByKeyword(this.value)"
            />
            <datalist id="searchMeme">
@@ -42,7 +42,7 @@
               <option value="Mysterious"></option>
               <option value="Serious"></option>
             </datalist>
-            <button class="keyword-reset fa-solid fa-trash" onclick="resetKeyword()"></button>
+            <button class="keyword-reset" onclick="resetKeyword()"><i class="fa-solid fa-trash"></i></button>
             <div class="keywords">
                 <button
                     class="keyword"
